@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#102a36">
+  <meta name="description" content="Lập kế hoạch chuyến đi với thông tin thời tiết minh họa và lịch trình cá nhân.">
+  <title>Weather &amp; Travel Planner</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/script.js" defer></script>
+</head>
+<body>
+  <div class="city-backdrop" aria-hidden="true">
+    <img class="city-backdrop__image is-active" data-city-backdrop="bien-hoa" src="images/city-bien-hoa.jpg" alt="" decoding="async" fetchpriority="high">
+    <img class="city-backdrop__image" data-city-backdrop="da-lat" src="images/city-da-lat.jpg" alt="" decoding="async" fetchpriority="low">
+    <img class="city-backdrop__image" data-city-backdrop="vung-tau" src="images/city-vung-tau.jpg" alt="" decoding="async" fetchpriority="low">
+    <img class="city-backdrop__image city-backdrop__image--fallback" data-city-backdrop="fallback" src="images/vietnam-fallback.jpg" alt="" decoding="async" fetchpriority="low">
+  </div>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="#" aria-label="Weather and Travel Planner, đầu trang">
+        <span class="brand-mark" aria-hidden="true">✳</span>
+        <span>WAYFARER<span class="brand-period">.</span></span>
+      </a>
+      <div class="header-note">
+        <span class="header-note__dot" aria-hidden="true"></span>
+        <span>Lên kế hoạch cho hành trình tiếp theo</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">WEATHER &amp; TRAVEL PLANNER</p>
+        <h1 id="page-title">Đi đâu cũng <span>đúng điệu.</span></h1>
+        <p class="intro__copy">Xem thời tiết, sắp xếp điểm đến và chuẩn bị cho một chuyến đi thật đáng nhớ.</p>
+      </section>
+
+      <div class="dashboard-grid">
+        <section class="panel weather-panel" aria-labelledby="weather-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">ĐIỂM ĐẾN CỦA BẠN</p>
+              <h2 id="weather-title">Thời tiết</h2>
+            </div>
+            <span class="live-badge"><span aria-hidden="true"></span> Dữ liệu minh họa</span>
+          </div>
+
+          <label class="field-label" for="city-select">Chọn thành phố</label>
+          <div class="select-wrap">
+            <select id="city-select" name="city">
+              <option value="bien-hoa">Biên Hòa</option>
+              <option value="da-lat">Đà Lạt</option>
+              <option value="vung-tau">Vũng Tàu</option>
+            </select>
+            <span class="select-chevron" aria-hidden="true">⌄</span>
+          </div>
+
+          <article class="weather-card weather-card--sunny" id="weather-card" aria-live="polite">
+            <div class="weather-card__top">
+              <div>
+                <p class="weather-card__kicker">THỜI TIẾT HIỆN TẠI</p>
+                <h3 id="weather-city">Biên Hòa</h3>
+              </div>
+              <span class="weather-icon" id="weather-icon" role="img" aria-label="Nắng">☀</span>
+            </div>
+            <div class="temperature-line">
+              <span class="temperature" id="temperature">32</span>
+              <span class="temperature-unit">°C</span>
+            </div>
+            <p class="weather-condition" id="weather-condition">Nắng</p>
+            <div class="weather-details">
+              <div class="weather-detail">
+                <span class="detail-icon" aria-hidden="true">◌</span>
+                <span class="detail-label">Độ ẩm</span>
+                <strong id="humidity">68%</strong>
+              </div>
+              <div class="weather-detail weather-detail--note">
+                <span class="detail-icon" aria-hidden="true">✦</span>
+                <span class="detail-label">Gợi ý phù hợp</span>
+                <strong id="weather-tip-short">Nắng ấm</strong>
+              </div>
+            </div>
+          </article>
+
+          <aside class="suggestion-card" aria-labelledby="suggestion-title">
+            <span class="suggestion-icon" aria-hidden="true">✧</span>
+            <div>
+              <p class="eyebrow">SMART SUGGESTION</p>
+              <h3 id="suggestion-title">Chuẩn bị thông minh</h3>
+              <p id="suggestion-text" aria-live="polite">Thời tiết nắng ấm, đừng quên mang nước uống, kính râm và kem chống nắng.</p>
+            </div>
+          </aside>
+        </section>
+
+        <section class="panel itinerary-panel" aria-labelledby="itinerary-title">
+          <div class="section-heading itinerary-heading">
+            <div>
+              <p class="eyebrow">THIẾT KẾ CHUYẾN ĐI</p>
+              <h2 id="itinerary-title">Lịch trình của bạn</h2>
+            </div>
+            <span class="itinerary-mark" aria-hidden="true">↗</span>
+          </div>
+
+          <form class="add-form" id="itinerary-form" novalidate>
+            <div class="form-field">
+              <label class="field-label" for="place-title">Tên địa điểm</label>
+              <input id="place-title" name="title" type="text" placeholder="Ví dụ: Hồ Xuân Hương" maxlength="100" autocomplete="off" required>
+            </div>
+            <div class="form-field">
+              <label class="field-label" for="visit-time">Thời gian ghé thăm</label>
+              <input id="visit-time" name="visitTime" type="datetime-local" required>
+            </div>
+            <button class="primary-button" type="submit">
+              <span aria-hidden="true">＋</span>
+              <span>Thêm địa điểm</span>
+            </button>
+          </form>
+          <p class="form-hint" id="form-hint">Chọn ngày và giờ dự kiến cho điểm dừng chân.</p>
+
+          <div class="list-toolbar" aria-label="Tìm kiếm và lọc lịch trình">
+            <label class="search-box" for="search-input">
+              <span aria-hidden="true">⌕</span>
+              <input id="search-input" type="search" placeholder="Tìm địa điểm..." autocomplete="off">
+            </label>
+            <label class="visually-hidden" for="status-filter">Lọc theo trạng thái</label>
+            <select id="status-filter" class="toolbar-select">
+              <option value="all">Tất cả</option>
+              <option value="pending">Chưa đến</option>
+              <option value="visited">Đã đến</option>
+            </select>
+            <label class="visually-hidden" for="sort-order">Sắp xếp tên</label>
+            <select id="sort-order" class="toolbar-select">
+              <option value="asc">Tên A–Z</option>
+              <option value="desc">Tên Z–A</option>
+            </select>
+          </div>
+
+          <div class="list-summary">
+            <p id="result-count" aria-live="polite">0 địa điểm</p>
+            <label class="page-size-label" for="page-size">Hiển thị
+              <select id="page-size" class="page-size-select">
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+                <option value="all">All</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="itinerary-list" id="itinerary-list" aria-live="polite">
+            <div class="empty-state" id="empty-state">
+              <span class="empty-state__icon" aria-hidden="true">⌖</span>
+              <h3>Chuyến đi bắt đầu từ đây</h3>
+              <p>Thêm địa điểm đầu tiên để tạo lịch trình của riêng bạn.</p>
+            </div>
+          </div>
+
+          <nav class="pagination" id="pagination" aria-label="Điều hướng lịch trình" hidden>
+            <button class="page-button" id="previous-page" type="button" aria-label="Trang trước">←</button>
+            <span class="page-indicator" id="page-indicator">Trang 1 / 1</span>
+            <button class="page-button" id="next-page" type="button" aria-label="Trang sau">→</button>
+          </nav>
+        </section>
+      </div>
+
+      <p class="app-notice" id="app-notice" role="status" aria-live="polite" hidden></p>
+      <footer class="page-footer">
+        <span>Hành trình đẹp bắt đầu từ một kế hoạch hay.</span>
+        <span>Weather &amp; Travel Planner <span aria-hidden="true">✳</span></span>
+        <p class="photo-credits">
+          Ảnh nền (đã thu nhỏ): <a href="https://commons.wikimedia.org/wiki/File:The_view_of_Nguyen_Van_Tri_Park,_Bien_Hoa,_Dong_Nai,_Vietnam.JPG" target="_blank" rel="noopener noreferrer">Biên Hòa — Hisi21</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a>); <a href="https://commons.wikimedia.org/wiki/File:Da_Lat_-_Xuan_Huong_Lake.jpg" target="_blank" rel="noopener noreferrer">Đà Lạt — P. Hughes</a> (<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>); <a href="https://commons.wikimedia.org/wiki/File:Vung_tau_bai_sau_-_viet_nam_-_panoramio.jpg" target="_blank" rel="noopener noreferrer">Vũng Tàu — trungydang</a> (<a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener noreferrer">CC BY 3.0</a>); dự phòng Tràng An — <a href="https://commons.wikimedia.org/wiki/File:Vietnam,_Ninh_Binh,_Limestone_mountains.jpg" target="_blank" rel="noopener noreferrer">Vyacheslav Argenberg</a> (<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>).
+        </p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
